@@ -62,6 +62,9 @@ int Tool(struct DriverToolOptions &Opt) noexcept {
   if (Opt.PropThreads.value()) {
     Conf.addProposal(Proposal::Threads);
   }
+  if (Opt.PropFunctionReference.value()) {
+    Conf.addProposal(Proposal::FunctionReferences);
+  }
   if (Opt.PropAll.value()) {
     Conf.addProposal(Proposal::MultiMemories);
     Conf.addProposal(Proposal::TailCall);
@@ -117,9 +120,11 @@ int Tool(struct DriverToolOptions &Opt) noexcept {
   if (auto Result = VM.loadWasm(InputPath.u8string()); !Result) {
     return EXIT_FAILURE;
   }
+
   if (auto Result = VM.validate(); !Result) {
     return EXIT_FAILURE;
   }
+
   if (auto Result = VM.instantiate(); !Result) {
     return EXIT_FAILURE;
   }
