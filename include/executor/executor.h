@@ -125,9 +125,9 @@ public:
                               const Runtime::Instance::ModuleInstance &ModInst);
 
   /// Invoke a WASM function by function instance.
-  Expect<std::vector<std::pair<ValVariant, FullValType>>>
+  Expect<std::vector<std::pair<ValVariant, ValType>>>
   invoke(const Runtime::Instance::FunctionInstance *FuncInst,
-         Span<const ValVariant> Params, Span<const FullValType> ParamTypes);
+         Span<const ValVariant> Params, Span<const ValType> ParamTypes);
 
   /// Asynchronous invoke a WASM function by function instance.
   Async<Expect<std::vector<std::pair<ValVariant, ValType>>>>

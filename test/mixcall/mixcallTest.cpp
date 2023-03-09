@@ -132,7 +132,7 @@ TEST(MixCallTest, Call__InterpCallAOT) {
   WasmEdge::Expect<void> Res;
   HostModule HostMod;
   std::vector<WasmEdge::ValVariant> FuncArgs;
-  std::vector<WasmEdge::FullValType> FuncArgTypes;
+  std::vector<WasmEdge::ValType> FuncArgTypes;
 
   // Prepare module2 file
   HexToFile(Module2Wasm, Module2Path);
@@ -158,28 +158,28 @@ TEST(MixCallTest, Call__InterpCallAOT) {
 
   // Run `printAdd`
   FuncArgs = {uint32_t(1234), uint32_t(5678)};
-  FuncArgTypes = {WasmEdge::ValType::I32, WasmEdge::ValType::I32};
+  FuncArgTypes = {WasmEdge::ValTypeCode::I32, WasmEdge::ValTypeCode::I32};
   auto Ret = VM.execute("printAdd", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
 
   // Run `printDiv`
   FuncArgs = {double(9876.0), double(4321.0)};
-  FuncArgTypes = {WasmEdge::ValType::F64, WasmEdge::ValType::F64};
+  FuncArgTypes = {WasmEdge::ValTypeCode::F64, WasmEdge::ValTypeCode::F64};
   Ret = VM.execute("printDiv", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
 
   // Run `printI32`
   FuncArgs = {uint32_t(87654321)};
-  FuncArgTypes = {WasmEdge::ValType::I32};
+  FuncArgTypes = {WasmEdge::ValTypeCode::I32};
   Ret = VM.execute("printI32", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
 
   // Run `printF64`
   FuncArgs = {double(5566.1122)};
-  FuncArgTypes = {WasmEdge::ValType::F64};
+  FuncArgTypes = {WasmEdge::ValTypeCode::F64};
   Ret = VM.execute("printF64", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
@@ -191,7 +191,7 @@ TEST(MixCallTest, Call__AOTCallInterp) {
   WasmEdge::Expect<void> Res;
   HostModule HostMod;
   std::vector<WasmEdge::ValVariant> FuncArgs;
-  std::vector<WasmEdge::FullValType> FuncArgTypes;
+  std::vector<WasmEdge::ValType> FuncArgTypes;
 
   // Prepare Module1 file
   HexToFile(Module1Wasm, Module1Path);
@@ -218,28 +218,28 @@ TEST(MixCallTest, Call__AOTCallInterp) {
 
   // Run `printAdd`
   FuncArgs = {uint32_t(1234), uint32_t(5678)};
-  FuncArgTypes = {WasmEdge::ValType::I32, WasmEdge::ValType::I32};
+  FuncArgTypes = {WasmEdge::ValTypeCode::I32, WasmEdge::ValTypeCode::I32};
   auto Ret = VM.execute("printAdd", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
 
   // Run `printDiv`
   FuncArgs = {double(9876.0), double(4321.0)};
-  FuncArgTypes = {WasmEdge::ValType::F64, WasmEdge::ValType::F64};
+  FuncArgTypes = {WasmEdge::ValTypeCode::F64, WasmEdge::ValTypeCode::F64};
   Ret = VM.execute("printDiv", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
 
   // Run `printI32`
   FuncArgs = {uint32_t(87654321)};
-  FuncArgTypes = {WasmEdge::ValType::I32};
+  FuncArgTypes = {WasmEdge::ValTypeCode::I32};
   Ret = VM.execute("printI32", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
 
   // Run `printF64`
   FuncArgs = {double(5566.1122)};
-  FuncArgTypes = {WasmEdge::ValType::F64};
+  FuncArgTypes = {WasmEdge::ValTypeCode::F64};
   Ret = VM.execute("printF64", FuncArgs, FuncArgTypes);
   EXPECT_TRUE(Ret);
   EXPECT_EQ((*Ret).size(), 0);
